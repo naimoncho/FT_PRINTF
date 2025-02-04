@@ -1,38 +1,47 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncheniou <ncheniou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/04 10:36:21 by ncheniou          #+#    #+#             */
+/*   Updated: 2025/02/04 17:21:44 by ncheniou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void	ft_check(char s, va_list args, int *len, int *i)
 {
 	if (s == 's')
-		ft_putstr(va_arg(args, char *));
+		ft_putstr(va_arg(args, char *), len);
 	else if (s == 'c')
-		ft_putchar(va_arg(args, int));
+		(*len) += ft_char(va_arg(args, int));
 	else if (s == 'd')
-		ft_putnbr(va_arg(args, int));
+		ft_putnbr(va_arg(args, int), len);
 	else if (s == 'p')
-	{
-		write (1, "0x", 1);
-		(*len) += 2;
-		ft_putptr(va_arg(args, unsigned long), "0123456789abcdef");
-	}
+		ft_putptr(va_arg(args, unsigned long), "0123456789abcdef", len);
 	else if (s == 'i')
-		ft_putnbr(va_arg(args, int));
+		ft_putnbr(va_arg(args, int), len);
 	else if (s == 'u')
 		ft_putnbr_base(va_arg(args, int), "0123456789", len);
-	else if ( s == 'x')
+	else if (s == 'x')
 		ft_putnbr_base(va_arg(args, int), "0123456789abcdef", len);
 	else if (s == 'X')
 		ft_putnbr_base(va_arg(args, int), "0123456789ABCDEF", len);
 	else if (s == '%')
-		ft_putchar('%');
+		(*len) += ft_char('%');
 	else
 		(*i)--;
 }
 
 int	ft_printf(char const *str, ...)
 {
-	int	i;
-	int	length;
-	va_list args;
+	int		i;
+	int		length;
+	va_list	args;
+
 	va_start(args, str);
 	i = 0;
 	length = 0;
@@ -54,3 +63,10 @@ int	ft_printf(char const *str, ...)
 	va_end(args);
 	return (length);
 }
+// int main()
+// {
+// 	int i = ft_printf("%p %p\n","miau", 0);
+// 	printf("%d\n", i);
+// 	int j = printf("%p %p\n", "miau", 0);
+// 	printf("%d\n", j);
+// }

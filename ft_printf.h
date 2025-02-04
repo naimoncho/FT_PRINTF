@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncheniou <ncheniou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/04 10:36:14 by ncheniou          #+#    #+#             */
+/*   Updated: 2025/02/04 17:11:36 by ncheniou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
@@ -8,12 +20,12 @@
 # include <stdarg.h>
 
 size_t	ft_strlen(const char *str);
-void	ft_putnbr(int n);
-void	*ft_putnbr_base(unsigned long int num, char *base, int *len);
-int		*ft_putptr(unsigned long int n, char *base);
-void	ft_putchar(char c);
-void	ft_putstr(char *s);
+void	ft_putnbr(int n, int *len);
+void	*ft_putnbr_base(unsigned long num, char *base, int *len);
+void	ft_putptr(unsigned long n, char *base, int *len);
+int		ft_char(char c);
+void	ft_putstr(char *s, int *len);
 void	ft_check(char s, va_list args, int *len, int *i);
 int		ft_printf(char const *str, ...);
 
-# endif 
+#endif 
