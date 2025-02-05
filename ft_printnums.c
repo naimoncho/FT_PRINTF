@@ -6,7 +6,7 @@
 /*   By: ncheniou <ncheniou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:36:09 by ncheniou          #+#    #+#             */
-/*   Updated: 2025/02/04 17:17:37 by ncheniou         ###   ########.fr       */
+/*   Updated: 2025/02/05 20:21:18 by ncheniou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t	ft_strlen(const char *str)
 	aux = 0;
 	while (str[aux] != '\0')
 	{
-		aux ++;
+		aux++;
 	}
 	return (aux);
 }
@@ -28,8 +28,7 @@ void	ft_putnbr(int n, int *len)
 {
 	if (n == -2147483648)
 	{
-		write(1, "-2147483648", 11);
-		(*len) += 11;
+		(*len) += write(1, "-2147483648", 11);
 		return ;
 	}
 	if (n < 0)
@@ -40,11 +39,10 @@ void	ft_putnbr(int n, int *len)
 	}
 	if (n >= 10)
 		ft_putnbr(n / 10, len);
-	write(1, &"0123456789"[n % 10], 1);
-	(*len) += 1;
+	(*len) += write(1, &"0123456789"[n % 10], 1);
 }
 
-void	*ft_putnbr_base(unsigned long num, char *base, int *len)
+void	ft_putnbr_base(unsigned long num, char *base, int *len)
 {
 	unsigned int	i;
 	unsigned int	length;
@@ -52,10 +50,24 @@ void	*ft_putnbr_base(unsigned long num, char *base, int *len)
 	length = ft_strlen(base);
 	i = num;
 	if (i >= length)
+	{
 		ft_putnbr_base(i / length, base, len);
+	}
 	ft_char(base[i % length]);
 	(*len)++;
-	return (0);
+}
+
+static void	ft_putnbr_hexa(unsigned long num, char *base, int *len)
+{
+	unsigned int	length;
+
+	length = 16;
+	if (num >= length)
+	{
+		ft_putnbr_hexa(num / length, base, len);
+	}
+	ft_char(base[num % length]);
+	(*len)++;
 }
 
 void	ft_putptr(unsigned long n, char *base, int *len)
@@ -66,9 +78,9 @@ void	ft_putptr(unsigned long n, char *base, int *len)
 		return ;
 	}
 	(*len) += write(1, "0x", 2);
-	ft_putnbr_base(n, base, len);
+	ft_putnbr_hexa(n, base, len);
 }
-	// if (n >= counter)
-	// 	i += ft_putptr(n / counter, base);
-	// i += ft_char(base[n % counter]);
-	// return (i);
+// if (n >= counter)
+// 	i += ft_putptr(n / counter, base);
+// i += ft_char(base[n % counter]);
+// return (i);

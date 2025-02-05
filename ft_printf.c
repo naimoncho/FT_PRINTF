@@ -6,7 +6,7 @@
 /*   By: ncheniou <ncheniou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:36:21 by ncheniou          #+#    #+#             */
-/*   Updated: 2025/02/04 17:21:44 by ncheniou         ###   ########.fr       */
+/*   Updated: 2025/02/05 20:16:24 by ncheniou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,14 @@ int	ft_printf(char const *str, ...)
 }
 // int main()
 // {
-// 	int i = ft_printf("%p %p\n","miau", 0);
+// 	int n = INT_MAX;
+// 	//int nb = INT_MIN;
+
+// 	void *ptr;
+// 	ptr = &n;
+// 	printf("%lu\n", sizeof(unsigned long));
+// 	int i = ft_printf(" %p\n", ptr);
 // 	printf("%d\n", i);
-// 	int j = printf("%p %p\n", "miau", 0);
-// 	printf("%d\n", j);
+// 	int j = printf(" %p\n", ptr);
+// 	printf("%d\n", j);  
 // }
